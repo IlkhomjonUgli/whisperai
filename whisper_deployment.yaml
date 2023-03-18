@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whisper_flask_lb
+  namespace: whisper_flask_lb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+        - name: whisperai_container
+          image: samjamaloff/whisperai
+          ports:
+            - name: tcp
+              containerPort: 5000
